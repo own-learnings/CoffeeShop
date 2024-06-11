@@ -1,0 +1,52 @@
+plugins {
+	id 'java'
+	id 'org.springframework.boot' version '3.3.0'
+	id 'io.spring.dependency-management' version '1.1.5'
+	id 'org.graalvm.buildtools.native' version '0.10.2'
+}
+
+group = 'com.coffeeshop'
+version = '0.0.1-SNAPSHOT'
+
+java {
+	toolchain {
+		languageVersion = JavaLanguageVersion.of(17)
+	}
+}
+
+configurations {
+	compileOnly {
+		extendsFrom annotationProcessor
+	}
+}
+
+repositories {
+	mavenCentral()
+}
+
+dependencies {
+
+	testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+	// Spring Boot Starter Web
+	implementation 'org.springframework.boot:spring-boot-starter-web'
+
+	// Spring Boot Starter Test
+	testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+	// Lombok for cleaner code
+	compileOnly 'org.projectlombok:lombok'
+	annotationProcessor 'org.projectlombok:lombok'
+
+	// For unit testing with Mockito and PowerMock
+	testImplementation 'org.mockito:mockito-core'
+	testImplementation 'org.mockito:mockito-junit-jupiter'
+
+	// Ensure that the Spring Boot Gradle plugin is applied
+	implementation 'org.springframework.boot:spring-boot-starter-aop'
+}
+
+tasks.named('test') {
+	useJUnitPlatform()
+	// Exclude tests for the model package
+	exclude '**/model/**'
+}
