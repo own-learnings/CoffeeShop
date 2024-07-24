@@ -45,13 +45,13 @@ public class OrderController {
         return order.getTotalPrice();
     }
 
-    @GetMapping("/order/invoice")
+    @GetMapping("/invoice")
     public Invoice getInvoice(@RequestBody List<OrderItem> orderItems) {
         return orderService.generateInvoice(orderItems);
     }
 
     @GetMapping
     public String healthCheck() {
-        return "Coffee Shop is running!";
+        return orderService.healthCheck();
     }
 }

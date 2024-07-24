@@ -88,4 +88,8 @@ public class OrderService {
         return menuItems.get(menuItem.getName()).getBasePrice();
     }
 
+
+    public String healthCheck() {
+        return "Coffee Shop is running!";
+    }
 }
